@@ -4,13 +4,12 @@
 
 import uuid
 from datetime import datetime
-#from models import storage
+# from models import storage
 
 
 class BaseModel:
 
     """Class from which other classes will inherit """
-
 
     def __init__(self, *args, **kwargs):
         """Initializes instance attributes
@@ -20,7 +19,6 @@ class BaseModel:
             args : list of arguments
             kwargs: dict of key-values arguments
         """
-
 
         if kwargs is not None and kwargs != {}:
             for key in kwargs:
@@ -34,25 +32,21 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            #storage.new(self)
+# storage.new(self)
 
     def __str__(self):
         """Returns string representation"""
 
-
         return "[{}] ({}) {}".\
-                format(type(self).__name__, self.id, self.__dict__)
-
+            format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """Updates the public instance attribue updated_at"""
         self.updated_at = datetime.now()
-        #storage.save()
-
+# storage.save()
 
     def to_dict(self):
         """returns a dictionary containing all key/value of __dict__"""
-
 
         my_dict = self.__dict__.copy()
         my_dict["__class__"] = type(self).__name__
