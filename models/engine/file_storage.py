@@ -8,12 +8,12 @@ import os
 class FileStorage:
 
     """class for storing and retrieving data"""
-    __file__path = "file.json"
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):
         """returns the dictionary __objects"""
-        returns FileStorage.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id"""
@@ -31,7 +31,7 @@ class FileStorage:
     def classes(self):
         """Returns a dictionary of valid classes and their references"""
         from models.base_model import BaseModel
-        from models.user import user
+        from models.user import User
         from models.state import State
         from models.city import City
         from models.amenity import Amenity
@@ -46,6 +46,7 @@ class FileStorage:
                    "Place": Place,
                    "Review": Review}
         return classes
+
     def reload(self):
         """Reloads the stored objects"""
         if not os.path.isfile(FileStorage.__file_path):
@@ -69,3 +70,29 @@ class FileStorage:
                   "password": str,
                   "first_name": str,
                   "last_name": str},
+                  "State":
+                  {"name": str},
+                  "City":
+                  {"state_id": str,
+                    "name": str},
+                  "Amenity":
+                  {"name": str},
+                  "Place":
+                  {"city_id": str,
+                   "user-id": str,
+                   "name": str,
+                   "description": str,
+                   "number_rooms": int,
+                   "number_bathrooms": int,
+                   "max_guest": int,
+                   "price_by_night": int,
+                   "latitude": float,
+                   "longitude": float,
+                   "amenity_ids": list},
+                  "Review":
+                  {"place_id": str,
+                   "user_id": str,
+                   "text": str}
+        }
+        return attributes
+
